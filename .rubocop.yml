@@ -1,0 +1,34 @@
+Metrics:
+  Enabled: false
+Style/Documentation:
+  Enabled: false
+Layout/SpaceInsideArrayLiteralBrackets:
+  Enabled: false
+Layout/EmptyLineAfterGuardClause:
+  Enabled: False
+Style/NumericPredicate:
+  Enabled: false
+Naming:
+  Enabled: False
+Style/TernaryParentheses:
+  Enabled: False
+Style/StringLiterals:
+  Enabled: False
+Style/ParallelAssignment:
+  Enabled: False
+Style/IfUnlessModifier:
+  Enabled: False
+Style/ConditionalAssignment:
+  Enabled: False
+Style/IfInsideElse:
+  Enabled: False
+Style/Next:
+  Enabled: False
+Layout/LineLength:
+  Enabled: False
+Layout/LeadingCommentSpace:
+  Enabled: False
+Lint/RescueException:
+  Enabled: False
+Style/ExplicitBlockArgument:
+  Enabled: False
