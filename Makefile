@@ -60,11 +60,14 @@
 # Change here if you don't have zsh:
 SHELL = zsh
 
+MAKEFILE_DIR := $(patsubst %/,%,$(dir $(realpath $(lastword $(MAKEFILE_LIST)))))
+
 COMPILED_SOURCES := $(wildcard day*.c day*.go day*.swift day*.cr day*.rs day*.zig day*.hs)
 BINARIES := $(subst .,-,$(COMPILED_SOURCES))
 SCRIPTS := $(wildcard day*.rb day*.py day*.ts day*.js day*.sh day*.pl day*.exs day*.erl day*.clj day*.awk day*.lua)
 RUNNABLES := $(BINARIES) $(SCRIPTS)
-HELPERS := expected.sh
+EXPECTED := $(MAKEFILE_DIR)/expected.sh
+HELPERS = $(EXPECTED)
 
 GHC := $(shell if command -v stack >/dev/null 2>&1; then echo 'stack ghc --'; else echo 'ghc'; fi)
 SWIFT_BUILD_FLAGS = --configuration release
@@ -100,7 +103,7 @@ day%-hs: day%.hs
 	$(GHC) -O2 -o $@ $<
 	@rm -f day$*.hi day$*.o
 
-expected.sh:
+$(EXPECTED):
 	@echo '#!/bin/sh' > $@
 	@echo 'exec awk -v file="$$1" -v bin="$$2" '\' >> $@
 	@echo '    BEGIN {' >> $@
@@ -138,7 +141,7 @@ runnable_$(notdir $(1))_input_$(2): $(1) $(2)
 	@echo
 	@echo -e "> \033[1m./$(1) <$(2)\033[0m"
 	@{ TIMEFMT=$$$$'\n$(1) \t%*U user %*S system %P cpu %*E total\t%M KB'; time ./$(1) <$(2); } 2> >( { if [ -t 2 ]; then while read line; do echo -en "\033[90m"; echo -n "$$$$line"; echo -e "\033[0m"; done; else cat; fi; } >&2 )
-	@echo -e "\033[90m`./expected.sh $(2) $(1)`\033[0m"
+	@echo -e "\033[90m`$(EXPECTED) $(2) $(1)`\033[0m"
 endef
 
 $(foreach r,$(RUNNABLES),$(eval $(call run_single_input_template,$(r),simple$(call get_day,$(r)).txt)))
