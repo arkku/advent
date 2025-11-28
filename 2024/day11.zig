@@ -1,9 +1,7 @@
 const std = @import("std");
-const print = std.debug.print;
 const log10 = std.math.log10;
 const pow = std.math.pow;
 const allocator = std.heap.page_allocator;
-const stdout = std.io.getStdOut().writer();
 
 var cache: std.AutoHashMap(u64, u64) = std.AutoHashMap(u64, u64).init(allocator);
 
@@ -23,7 +21,7 @@ fn blink(times: u64, stone: u64) u64 {
     if (stone == 0) {
         result = blink(times - 1, 1);
     } else {
-        const digit_count = std.math.log10(stone) + 1;
+        const digit_count = log10(stone) + 1;
         if (digit_count % 2 == 0) {
             const divisor = pow(u64, 10, digit_count / 2);
             result = blink(times - 1, stone / divisor) + blink(times - 1, stone % divisor);
@@ -37,22 +35,32 @@ fn blink(times: u64, stone: u64) u64 {
 }
 
 pub fn main() !void {
-    var stdin = std.io.getStdIn().reader();
+    var stdout_buffer: [256]u8 = undefined;
+    var stdout_writer = std.fs.File.stdout().writer(&stdout_buffer);
+    const stdout = &stdout_writer.interface;
 
-    const line = try stdin.readUntilDelimiterOrEofAlloc(allocator, '\n', 1024) orelse {
-        return error.UnexpectedEndOfInput;
-    };
-    defer allocator.free(line);
+    var stdin_buffer: [1024]u8 = undefined;
+    const stdin = std.fs.File.stdin();
+    var stdin_reader = stdin.reader(&stdin_buffer);
+    const reader = &stdin_reader.interface;
 
-    const trimmed = std.mem.trim(u8, line, " \t\n\r");
-    var tokenizer = std.mem.tokenize(u8, trimmed, " ");
-    var stones = std.ArrayList(u64).init(allocator);
-    defer stones.deinit();
+    var stones = try std.ArrayList(u64).initCapacity(allocator, 0);
+    defer stones.deinit(allocator);
 
-    while (tokenizer.next()) |token| {
-        stones.append(try std.fmt.parseInt(u64, token, 10)) catch {
-            return error.InvalidInput;
-        };
+    while (reader.takeDelimiterExclusive('\n')) |line| {
+        if (line.len == 0) break;
+
+        var fields = std.mem.tokenizeAny(u8, line, " \t\r");
+        while (fields.next()) |field| {
+            const stone = try std.fmt.parseInt(u64, field, 10);
+            try stones.append(allocator, stone);
+        }
+    } else |err| switch (err) {
+        error.EndOfStream => {},
+        else => { 
+            std.log.err("Error: {}\n", .{err});
+            return err;
+        }
     }
 
     const times_list = [_]u64{ 25, 75 };
@@ -62,6 +70,7 @@ pub fn main() !void {
         for (stones.items) |stone| {
             count += blink(times, stone);
         }
-        stdout.print("{}\n", .{count}) catch {};
+        try stdout.print("{}\n", .{count});
+        try stdout.flush();
     }
 }
