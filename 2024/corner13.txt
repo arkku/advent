@@ -1,0 +1,63 @@
+Button A: X+50, Y+20
+Button B: X+50, Y+20
+Prize: X=500, Y=200
+
+Button A: X+250, Y+100
+Button B: X+50, Y+20
+Prize: X=500, Y=200
+
+Button A: X+500, Y+200
+Button B: X+50, Y+20
+Prize: X=500, Y=200
+
+Button A: X+500, Y+200
+Button B: X+250, Y+100
+Prize: X=500, Y=200
+
+Button A: X+500, Y+200
+Button B: X+500, Y+200
+Prize: X=500, Y=200
+
+Button A: X+200, Y+100
+Button B: X+50, Y+25
+Prize: X=250, Y=125
+
+Button A: X+50, Y+25
+Button B: X+200, Y+100
+Prize: X=250, Y=125
+
+Button A: X+0, Y+25
+Button B: X+50, Y+0
+Prize: X=250, Y=100
+
+Button A: X+50, Y+0
+Button B: X+0, Y+25
+Prize: X=250, Y=100
+
+Button A: X+50, Y+0
+Button B: X+25, Y+0
+Prize: X=250, Y=0
+
+Button A: X+0, Y+50
+Button B: X+0, Y+25
+Prize: X=0, Y=250
+
+Button A: X+0, Y+0
+Button B: X+0, Y+25
+Prize: X=0, Y=250
+
+Button A: X+0, Y+50
+Button B: X+0, Y+0
+Prize: X=0, Y=250
+
+Button A: X+50, Y+0
+Button B: X+0, Y+0
+Prize: X=250, Y=0
+
+Button A: X+0, Y+0
+Button B: X+25, Y+0
+Prize: X=250, Y=0
+
+Button A: X+1, Y+1
+Button B: X+0, Y+0
+Prize: X=0, Y=0

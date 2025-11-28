@@ -1,5 +1,6 @@
 *[0-9].txt
 !simple*.txt
+!corner*.txt
 answers.txt
 day*-*
 day*dwarf
