@@ -90,7 +90,7 @@ class Map
     end
   end
 
-  # @yield [Plant]
+  # @yield [plant]
   # @yieldparam plant [Plant]
   def each_plant
     return enum_for(:each_plant) unless block_given?
@@ -115,7 +115,7 @@ class Map
   end
 
   # @param plant [Plant]
-  # @yield [fence]
+  # @yield [plant]
   # @yieldparam plant [Plant]
   def each_neighbour(plant)
     DIRECTIONS.each_value do |dx, dy|

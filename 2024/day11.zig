@@ -47,10 +47,8 @@ pub fn main() !void {
     var stones = try std.ArrayList(u64).initCapacity(allocator, 0);
     defer stones.deinit(allocator);
 
-    while (reader.takeDelimiterExclusive('\n')) |line| {
-        if (line.len == 0) break;
-
-        var fields = std.mem.tokenizeAny(u8, line, " \t\r");
+    while (reader.takeDelimiterInclusive('\n')) |line| {
+        var fields = std.mem.tokenizeAny(u8, line, " \t\r\n");
         while (fields.next()) |field| {
             const stone = try std.fmt.parseInt(u64, field, 10);
             try stones.append(allocator, stone);

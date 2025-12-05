@@ -92,7 +92,7 @@ class Map
     row[coords.x] = value
   end
 
-  # @yield coords
+  # @yield [coords]
   # @yieldparam coords [Coords]
   # @return [Enumerator<Coords>, self]
   def each_coords

@@ -114,7 +114,13 @@ class Coords
   EAST = Coords.new(x: 1, y: 0).freeze
   WEST = Coords.new(x: -1, y: 0).freeze
 
+  NORTHEAST = Coords.new(x: 1, y: -1).freeze
+  SOUTHEAST = Coords.new(x: 1, y: 1).freeze
+  SOUTHWEST = Coords.new(x: -1, y: 1).freeze
+  NORTHWEST = Coords.new(x: -1, y: -1).freeze
+
   DIRECTIONS = [NORTH, SOUTH, EAST, WEST].freeze
+  DIRECTIONS8 = (DIRECTIONS + [NORTHEAST, SOUTHEAST, SOUTHWEST, NORTHWEST]).freeze
 
   # @return [Coords]
   def self.zero
@@ -124,5 +130,26 @@ class Coords
   def self.each_direction(&block)
     return DIRECTIONS.enum_for(:each) unless block_given?
     DIRECTIONS.each(&block)
+  end
+
+  def self.each_direction8(&block)
+    return DIRECTIONS8.enum_for(:each) unless block_given?
+    DIRECTIONS8.each(&block)
+  end
+
+  def each_adjacent
+    return enum_for(:each_adjacent) unless block_given?
+    DIRECTIONS.each do |direction|
+      yield self + direction
+    end
+    self
+  end
+
+  def each_adjacent8
+    return enum_for(:each_adjacent8) unless block_given?
+    DIRECTIONS8.each do |direction|
+      yield self + direction
+    end
+    self
   end
 end

@@ -57,7 +57,7 @@ Block = Struct.new(:num, :index, :size, :next, :prev) do # rubocop:disable Style
     self
   end
 
-  # @yield node
+  # @yield [node]
   # @yieldparam node [Block]
   def each
     node = self
@@ -67,7 +67,7 @@ Block = Struct.new(:num, :index, :size, :next, :prev) do # rubocop:disable Style
     end
   end
 
-  # @yield node
+  # @yield [node]
   # @yieldparam node [Block]
   def each_reverse
     node = self
@@ -77,9 +77,9 @@ Block = Struct.new(:num, :index, :size, :next, :prev) do # rubocop:disable Style
     end
   end
 
-  # @yield node
+  # @yield [node]
   # @yieldparam node [Block]
-  # @yieldreturn [Boolean]
+  # @yieldreturn [Boolean] Return `true` on match.
   # @return [Block, nil]
   def first
     node = self
@@ -93,9 +93,9 @@ Block = Struct.new(:num, :index, :size, :next, :prev) do # rubocop:disable Style
     node
   end
 
-  # @yield node
+  # @yield [node]
   # @yieldparam node [Block]
-  # @yieldreturn [Boolean]
+  # @yieldreturn [Boolean] Return `true` on match.
   # @return [Block, nil]
   def find_reverse
     node = self
