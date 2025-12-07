@@ -71,6 +71,7 @@ HELPERS = $(EXPECTED)
 
 GHC := $(shell if command -v stack >/dev/null 2>&1; then echo 'stack ghc --'; else echo 'ghc'; fi)
 SWIFT_BUILD_FLAGS = --configuration release
+SWIFTC_FLAGS = -swift-version 6
 
 .PHONY: all clean
 all: $(HELPERS) $(BINARIES)
@@ -87,7 +88,7 @@ day%-go: day%.go
 
 day%-swift: day%.swift
 	@#swift build $(SWIFT_BUILD_FLAGS) --quiet && cp $(shell swift build $(SWIFT_BUILD_FLAGS) --show-bin-path)/$@ $@
-	@swiftc -O -o $@ $<
+	swiftc $(SWIFTC_FLAGS) -O -o $@ $<
 
 day%-cr: day%.cr
 	crystal build --release -o $@ $<
