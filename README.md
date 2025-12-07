@@ -1,7 +1,8 @@
 # Advent of Code
 
-This repository contains some of my Advent of Code solutions, along with a
-[Makefile](Makefile) to quickly build and check solutions in various languages.
+This repository contains some of my [Advent of Code](https://adventofcode.com)
+solutions, along with a [Makefile](Makefile) to quickly build and check
+solutions in various languages.
 
 ## Building
 
