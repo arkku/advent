@@ -1,6 +1,12 @@
 # frozen_string_literal: true
 
 Coords = Struct.new(:x, :y) do
+  # @param fields [Array(Numeric, Numeric)]
+  # @return [self]
+  def self.from_a(fields)
+    new(x: fields[0], y: fields[1]).freeze
+  end
+
   # @return [Boolean]
   def zero?
     x.zero? && y.zero?
@@ -59,7 +65,7 @@ Coords = Struct.new(:x, :y) do
   end
 
   # @param other [Coords]
-  # @return [Integer,Boolean]
+  # @return [Integer, Boolean]
   def factor_of?(other)
     xmod = x.nonzero? ? (other.x % x) : other.x
     ymod = y.nonzero? ? (other.y % y) : other.y
@@ -86,7 +92,7 @@ Coords = Struct.new(:x, :y) do
     (x - other.x).abs + (y - other.y).abs
   end
 
-  # @return [Array<Numeric>]
+  # @return [Array(Numeric, Numeric)]
   def to_a
     [x, y]
   end
@@ -103,6 +109,10 @@ Coords = Struct.new(:x, :y) do
 
   # @return [String]
   def to_s
+    "#{x},#{y}"
+  end
+
+  def inspect
     "(#{x},#{y})"
   end
 end
@@ -127,16 +137,22 @@ class Coords
     ZERO
   end
 
+  # @yield direction
+  # @yieldparam direction [Coords]
   def self.each_direction(&block)
     return DIRECTIONS.enum_for(:each) unless block_given?
     DIRECTIONS.each(&block)
   end
 
+  # @yield direction
+  # @yieldparam direction [Coords]
   def self.each_direction8(&block)
     return DIRECTIONS8.enum_for(:each) unless block_given?
     DIRECTIONS8.each(&block)
   end
 
+  # @yield coords
+  # @yieldparam coords [Coords]
   def each_adjacent
     return enum_for(:each_adjacent) unless block_given?
     DIRECTIONS.each do |direction|
@@ -145,6 +161,8 @@ class Coords
     self
   end
 
+  # @yield coords
+  # @yieldparam coords [Coords]
   def each_adjacent8
     return enum_for(:each_adjacent8) unless block_given?
     DIRECTIONS8.each do |direction|

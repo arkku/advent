@@ -16,7 +16,7 @@ end
 Fence = Struct.new(:x, :y, :direction) do
   # @return [Boolean]
   def horizontal?
-    direction == :north || direction == :south
+    %i[north south].include? direction
   end
 
   # @param other [Fence]

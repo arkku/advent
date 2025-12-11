@@ -7,7 +7,7 @@ operators = inputs.pop
 inputs = inputs.transpose
 
 # @param operator [String]
-# @param input [[Integer]]
+# @param input [Array<Integer>]
 # @return Integer
 def calculate(operator, input)
   case operator

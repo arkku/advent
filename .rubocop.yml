@@ -12,6 +12,8 @@ Naming:
   Enabled: False
 Style/TernaryParentheses:
   Enabled: False
+Style/RedundantParentheses:
+  Enabled: False
 Style/StringLiterals:
   Enabled: False
 Style/ParallelAssignment:
@@ -32,3 +34,9 @@ Lint/RescueException:
   Enabled: False
 Style/ExplicitBlockArgument:
   Enabled: False
+Style/RegexpLiteral:
+  Enabled: False
+Style/Style/TrailingUnderscoreVariable:
+  Enabled: False
+Lint/SafeNavigationChain:
+  Enabled: false

@@ -50,7 +50,7 @@ end
 puts disk.join if disk.count < 20
 
 # @param disk [Array<Block>]
-# @return [nil, [Block, Integer]]
+# @return [nil, Array(Block, Integer)]
 def last_file_with_index(disk)
   if (i = disk.rindex(&:file?))
     [disk[i], i]

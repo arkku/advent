@@ -17,7 +17,7 @@ DIRECTIONAL_KEYPAD = %w[
 
 # @param keys [Array<String>]
 # @param width [Integer]
-# @return [Hash<String, Coords>]
+# @return [Hash{String => Coords}]
 def generate_positions(keys, width: 3)
   coords = {}
   keys.each_with_index do |key, i|
@@ -62,10 +62,11 @@ def possible_moves_to_press(button, from:, gap:)
 end
 
 # @param keys [Array<String>]
-# @param key_positions [Hash<String, Coords>]
+# @param key_positions [Hash{String => Coords}]
 # @param index [Integer]
 # @param current [String]
 # @param position [Coords]
+# @param gap [Coords, nil]
 # @return [Array<Array<Array<String>>>]
 def possible_moves_for_keys(keys, key_positions: NUMPAD_POSITIONS, index: 0, current: 'A', position: nil, gap: nil)
   key = keys[index]
@@ -84,8 +85,8 @@ end
 
 # @param keys [Array<String>]
 # @param recursion [Integer]
-# @param key_positions [Hash<String, Coords>]
-# @param cache [Hash<String, Integer>]
+# @param key_positions [Hash{String => Coords}]
+# @param cache [Hash{String => Integer}]
 # @return [Integer]
 def shortest_sequence_length(keys:, recursion: 0, key_positions: NUMPAD_POSITIONS, cache: {})
   key = [keys.join, recursion, key_positions.count]

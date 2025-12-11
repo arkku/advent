@@ -4,7 +4,7 @@
 @cache = {}
 
 # @param times [Integer] The number of times to blink.
-# @param stones Integer The initial stone.
+# @param stone [Integer] The initial stone.
 # @return [Integer] The number of stones after all the blinks.
 def blink(times, stone)
   return 1 if times == 0

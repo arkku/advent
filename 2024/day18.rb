@@ -20,6 +20,7 @@ class Map
     @end_position = Coords.new(x: @width - 1, y: @height - 1)
   end
 
+  # @param coords [Coords]
   # @param time [Integer]
   # @return [Boolean]
   def obstacle_at?(coords, time:)

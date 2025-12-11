@@ -6,7 +6,7 @@ inputs = $stdin.each_line.map(&:chars).to_a
 operators = inputs.pop
 
 # @param operator [String]
-# @param input [[Integer]]
+# @param input [Array<Integer>]
 # @return Integer
 def calculate(operator, input)
   case operator

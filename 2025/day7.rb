@@ -20,7 +20,7 @@ class Map
   end
 
   # @yield row
-  # @yieldparam row [[String]]
+  # @yieldparam row [Array<String>]
   def each_row(&block)
     @map.each(&block)
   end
@@ -62,6 +62,9 @@ end
 
 map = Map.new(map)
 
+# @param position [Coords]
+# @param map [Map] The map is modified by this function!
+# @return [Integer]
 def beam_split_count(position:, map:)
   case map[position]
   when '^'

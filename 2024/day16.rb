@@ -35,7 +35,7 @@ Traversal = Struct.new(:position, :direction, :score, :path) do
     [position, direction]
   end
 
-  # @return [<Array<Traversal>]
+  # @return [Array<Traversal>]
   def next_moves
     return enum_for(:next_moves) unless block_given?
     next_path = path + [vector]
@@ -124,7 +124,7 @@ class Map
   # @param sources [Array<Traversal>]
   # @param target [Coords]
   # @param solution [Traversal, nil]
-  # @return [[Traversal, nil], Hash<Array<Coords>, Integer>]
+  # @return [Array(nil, Hash{Array<Coords> => Integer}), Array(Traversal, Hash{Array<Coords> => Integer})]
   def find_paths(sources:, target:, solution: nil)
     queue = Containers::MinHeap.new
     sources.each do |source|
@@ -160,7 +160,7 @@ class Map
   # @param source [Coords]
   # @param target [Coords]
   # @param best_score [Integer]
-  # @param scores_from_start [Hash<Array<Coords>, Integer]
+  # @param scores_from_start [Hash{Array<Coords> => Integer}]
   # @return Set<Coords>
   def tiles_on_best_paths(source:, target:, best_score:, scores_from_start:)
     best_tiles = Set.new([source, target])
@@ -170,7 +170,7 @@ class Map
     end
 
     solution, scores_from_end = find_paths(sources: antiplayers, target: source)
-    solution&.path.each { |pos, _| best_tiles << pos }
+    solution&.path.map(&:first).each { |pos| best_tiles << pos }
 
     scores_from_start.each_pair do |vector_start, score_start|
       pos, dir = *vector_start

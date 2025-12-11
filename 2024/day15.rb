@@ -58,7 +58,6 @@ end
 
 class Map
   # @param array_of_rows [Array<Array<String>>]
-  # @param is_wide [Boolean]
   def initialize(array_of_rows)
     @map = array_of_rows.map(&:dup)
     @cache = {}
@@ -200,7 +199,7 @@ ui = make_ui(enabled: moves.count < 100 || ARGV.include?('-v'))
 
 results = []
 
-runs.each do |map, robot| # rubocop:disable Lint/ShadowingOuterLocalVariable
+runs.each do |map, robot|
   map[robot] = '@'
   ui.frame { |output| output << map }
 

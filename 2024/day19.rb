@@ -26,7 +26,7 @@ end
 
 # @param pattern [String]
 # @param from [Array<String>]
-# @param cache [Hash<String, Integer>]
+# @param cache [Hash{String => Integer}]
 # @return [Integer]
 def ways_to_form(pattern:, from:, cache: {})
   if (cached = cache[pattern])
